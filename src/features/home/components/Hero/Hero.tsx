@@ -2,9 +2,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Full } from '@components/brand'
 import { setScrollLock } from '@hooks/use-lockscroll'
 import { introVariants, timeline } from '@lib/animations'
-import { Full } from '@lowping/brand-kit'
 import { AnimatePresence, motion } from 'motion/react'
 import { HeroBackground } from './HeroBackground'
 import { HeroContent } from './HeroContent'

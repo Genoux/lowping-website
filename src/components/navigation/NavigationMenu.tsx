@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { Full } from '@components/brand'
 import { Thunder } from '@components/icons'
 import { Button } from '@components/ui/button'
 import { useUpcomingEvent } from '@features/events/hooks/useEvents'
 import { setScrollLock } from '@hooks/use-lockscroll'
 import { introVariants } from '@lib/animations'
-import { Full } from '@lowping/brand-kit'
 import { Menu } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { MobileMenu } from './MobileMenu'

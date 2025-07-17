@@ -1,4 +1,3 @@
-// app/api/checkout/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { handleCheckout } from '@registration/actions/checkout'
 

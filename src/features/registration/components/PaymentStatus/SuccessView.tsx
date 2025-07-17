@@ -90,9 +90,7 @@ export function SuccessView({ details, title }: SuccessViewProps) {
               </Button>
             </Link>
             {details.receipt_url && (
-              <Link href={details.receipt_url} target="_blank">
-                <Button variant="outline">Voir la commande</Button>
-              </Link>
+              <Button variant="outline">Voir la commande</Button>
             )}
           </motion.div>
 

@@ -2,10 +2,10 @@
 'use client'
 
 import Link from 'next/link'
+import { Full } from '@components/brand'
 import { Discord, Facebook, Instagram, X } from '@components/icons'
 import { useUpcomingEvent } from '@features/events/hooks/useEvents'
 import { cn } from '@lib/utils'
-import { Full } from '@lowping/brand-kit'
 import packageJson from '@package'
 import { Badge } from '@ui/badge'
 import { Button } from '@ui/button'

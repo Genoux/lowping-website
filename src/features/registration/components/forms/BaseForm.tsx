@@ -108,7 +108,10 @@ export function BaseForm<T extends FormData>({
           {allFields.map(renderField)}
         </motion.div>
         <motion.div variants={staggerVariants.child} className="pt-4">
-          <Button type="submit" className="w-full bg-white hover:bg-white/90">
+          <Button
+            type="submit"
+            className="w-full rounded-full bg-white hover:bg-white/90"
+          >
             {"S'inscrire"}
           </Button>
         </motion.div>

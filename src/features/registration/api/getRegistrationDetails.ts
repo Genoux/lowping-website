@@ -1,7 +1,4 @@
-// features/registration/api/getRegistrationDetails.ts
 import { getEventById } from '@events/api/getEvents'
-import { stripe } from '@lib/services/stripe/stripe-server'
-import { supabase } from '@lib/services/supabase'
 import { FormData } from '@registration/types/forms'
 
 type RegistrationDetails = {
@@ -10,34 +7,24 @@ type RegistrationDetails = {
   receipt_url: string | null
 }
 
-export async function getRegistrationDetails(
-  sessionId: string,
-): Promise<RegistrationDetails | null> {
+export async function getRegistrationDetails(): Promise<RegistrationDetails | null> {
   try {
-    const session = await stripe.checkout.sessions.retrieve(sessionId)
-
-    const { data: event } = await getEventById(
-      session.metadata?.event_id as string,
-    )
+    const { data: event } = await getEventById('1')
     if (!event) return null
 
-    let registration = null
-    let receipt_url = null
-
-    if (typeof session.payment_intent === 'string') {
-      const { data: regData } = await supabase
-        .from('event_registrations')
-        .select('*')
-        .eq('payment_id', session.payment_intent)
-        .single()
-
-      registration = regData
-
-      const charges = await stripe.charges.list({
-        payment_intent: session.payment_intent,
-      })
-      receipt_url = charges.data[0]?.receipt_url
+    const registration = {
+      id: 'demo-registration-id',
+      event_id: '1',
+      email: 'demo@lowping.com',
+      name: 'Demo User',
+      discord: 'DemoUser#1234',
+      riot_id: 'DemoUser#TAG',
+      rank: 'Platinum',
+      payment_id: 'pi_demo_payment',
+      created_at: new Date().toISOString(),
     }
+
+    const receipt_url = `https://example.com/receipt/demo-receipt`
 
     return {
       event,

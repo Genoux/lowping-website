@@ -1,27 +1,39 @@
-import { supabase } from '@lib/services/supabase'
+import dummyEventsData from '../../../data/dummy-events.json'
+import type { Event } from '../types'
+
+const dummyEvents = dummyEventsData as Event[]
 
 export async function getEvents() {
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .order('date', { ascending: false })
-  return { data, error }
+  const sortedEvents = dummyEvents.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  )
+  return { data: sortedEvents, error: null }
 }
 
 export async function getEventById(id: string) {
-  return await supabase.from('events').select('*').eq('id', id).single()
+  const event = dummyEvents.find((e: Event) => e.id === id)
+  if (!event) {
+    return { data: null, error: { message: 'Event not found' } }
+  }
+  return { data: event, error: null }
 }
 
 export async function getEventBySlug(slug: string) {
-  return await supabase.from('events').select('*').eq('slug', slug).single()
+  const event = dummyEvents.find((e: Event) => e.slug === slug)
+  if (!event) {
+    return { data: null, error: { message: 'Event not found' } }
+  }
+  return { data: event, error: null }
 }
 
 export async function getUpcomingEvents() {
-  return await supabase
-    .from('events')
-    .select('*')
-    .gte('date', new Date().toISOString())
-    .order('date', { ascending: true })
-    .limit(1)
-    .single()
+  const upcomingEvents = dummyEvents
+    .filter((e: Event) => new Date(e.date) >= new Date())
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+  const upcomingEvent = upcomingEvents[0]
+  if (!upcomingEvent) {
+    return { data: null, error: { message: 'No upcoming events found' } }
+  }
+  return { data: upcomingEvent, error: null }
 }

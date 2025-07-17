@@ -1,8 +1,6 @@
-// features/registration/hooks/useCheckout.ts
 import { useState } from 'react'
 import { Database } from '@generated/index'
 import { useToast } from '@hooks/use-toast'
-import { getStripe } from '@lib/services/stripe/stripe'
 import { FormData } from '../types/forms'
 
 type Event = Database['public']['Tables']['events']['Row']
@@ -27,26 +25,33 @@ export function useCheckout() {
         throw new Error('No session ID returned')
       }
 
-      const stripe = await getStripe()
-      if (!stripe) {
-        throw new Error('Stripe failed to load')
+      if (data.mockCheckout) {
+        await new Promise((resolve) => setTimeout(resolve, 1500))
+
+        await fetch('/api/webhook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            type: 'checkout.session.completed',
+            data: { object: { id: data.sessionId } },
+          }),
+        })
+
+        window.location.href = `/events/registration/success?session_id=${data.sessionId}`
+        return
       }
 
-      const { error } = await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      })
-
-      if (error) {
-        throw error
-      }
+      throw new Error('Checkout not available')
     } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Erreur',
         description:
-          'Un problème est survenu lors du traitement de votre paiement.',
+          'Un problème est survenu lors du traitement de votre inscription.',
       })
-      console.error('Payment error:', error)
+      console.error('Registration error:', error)
     } finally {
       setIsLoading(false)
     }

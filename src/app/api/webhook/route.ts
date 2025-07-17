@@ -1,30 +1,12 @@
-// app/api/webhook/route.ts
-import { headers } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@lib/services/stripe/stripe-server'
 import { handleWebhook } from '@registration/actions/webhook'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text()
-    const headersList = await headers()
-    const signature = headersList.get('stripe-signature')
+    const mockEvent = JSON.parse(body)
 
-    if (!signature) {
-      return NextResponse.json(
-        { error: 'Missing stripe-signature header' },
-        { status: 400 },
-      )
-    }
-
-    // Construct the Stripe event
-    const stripeEvent = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
-    )
-
-    const result = await handleWebhook(stripeEvent, body, signature)
+    const result = await handleWebhook(mockEvent)
     return NextResponse.json(result)
   } catch (error) {
     console.error(

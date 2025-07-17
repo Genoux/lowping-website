@@ -1,8 +1,8 @@
 // components/navigation/MobileMenu.tsx
 import Link from 'next/link'
+import { Full } from '@components/brand'
 import { Discord, Facebook, Instagram, X } from '@components/icons'
 import { menuVariants } from '@lib/animations/variants/menu'
-import { Full } from '@lowping/brand-kit'
 import { X as XIcon } from 'lucide-react'
 import { motion } from 'motion/react'
 
