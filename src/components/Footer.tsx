@@ -4,7 +4,6 @@
 import Link from 'next/link'
 import { Full } from '@components/brand'
 import { Discord, Facebook, Instagram, X } from '@components/icons'
-import { useUpcomingEvent } from '@features/events/hooks/useEvents'
 import { cn } from '@lib/utils'
 import packageJson from '@package'
 import { Badge } from '@ui/badge'
@@ -15,7 +14,6 @@ interface FooterProps {
 }
 
 export function Footer({ className }: FooterProps) {
-  const { upcomingEvent } = useUpcomingEvent()
   return (
     <footer
       className={cn(
@@ -41,7 +39,7 @@ export function Footer({ className }: FooterProps) {
               <span>Discord</span>
             </Button>
             <Button variant="outline" size="sm" className="text-xs">
-              <Link href="/contact">Contacter</Link>
+              Contacter
             </Button>
           </div>
         </div>
@@ -92,8 +90,7 @@ export function Footer({ className }: FooterProps) {
         </p>
         <div className="flex gap-4">
           <Link
-            target="_blank"
-            href={`/events/${upcomingEvent?.slug}/register`}
+            href="/events"
             className="text-xs text-muted-foreground hover:text-foreground"
           >
             Événements

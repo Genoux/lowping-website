@@ -2,7 +2,6 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
-import { useUpcomingEvent } from '@features/events/hooks/useEvents'
 import { Button } from '@ui/button'
 import { ArrowRightIcon } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'motion/react'
@@ -17,7 +16,6 @@ export function Banner() {
   const height = useTransform(scrollYProgress, [0.2, 1], ['500px', '350px'])
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1])
-  const { upcomingEvent } = useUpcomingEvent()
 
   return (
     <motion.div ref={sectionRef} className="container relative py-16 md:py-24">
@@ -45,12 +43,8 @@ export function Banner() {
               size="lg"
               className="min-h-12 bg-white pl-5 pr-4 font-medium tracking-wide text-black hover:bg-white/90"
             >
-              <Link
-                className="flex items-center gap-2"
-                href={`/events/${upcomingEvent?.slug}/register`}
-                target="_blank"
-              >
-                Prochain Tournoi
+              <Link className="flex items-center gap-2" href="/events">
+                Évènements
                 <ArrowRightIcon size={20} />
               </Link>
             </Button>

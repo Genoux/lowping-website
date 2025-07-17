@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Full } from '@components/brand'
 import { Thunder } from '@components/icons'
 import { Button } from '@components/ui/button'
-import { useUpcomingEvent } from '@features/events/hooks/useEvents'
 import { setScrollLock } from '@hooks/use-lockscroll'
 import { introVariants } from '@lib/animations'
 import { Menu } from 'lucide-react'
@@ -19,7 +18,6 @@ const navLinks = [
 
 export function NavigationMenu() {
   const [isOpen, setIsOpen] = useState(false)
-  const { upcomingEvent } = useUpcomingEvent()
 
   return (
     <nav className="absolute left-0 right-0 top-0 z-30 w-full pt-4">
@@ -65,11 +63,10 @@ export function NavigationMenu() {
                 >
                   <Thunder size={16} />
                   <Link
-                    href={`/events/${upcomingEvent?.slug}/register`}
-                    target="_blank"
+                    href="/events"
                     className="flex items-center gap-2 text-sm"
                   >
-                    Évènement
+                    Évènements
                   </Link>
                 </Button>
               </motion.div>
@@ -101,12 +98,12 @@ export function NavigationMenu() {
             }}
             navLinks={[
               { href: '/', label: 'Accueil' },
-              { href: '/tournaments', label: 'Règlement' },
+              { href: '/', label: 'Règlement' },
               {
-                href: `/events/${upcomingEvent?.slug}/register`,
-                label: 'Évènement',
+                href: '/events',
+                label: 'Évènements',
               },
-              { href: '/contact', label: 'Contacter' },
+              { href: '/', label: 'Contacter' },
             ]}
           />
         )}
