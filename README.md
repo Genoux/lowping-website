@@ -1,5 +1,8 @@
 # Lowping - Esports Tournament Platform
 
+<img width="3028" height="1720" alt="lowping" src="https://github.com/user-attachments/assets/52d75fd4-cb62-45f6-9dd3-a5755bde7884" />
+
+---
 > **⚠️ DEMO PROJECT DISCLAIMER**
 >
 > This is **NOT a real production website**. This project is designed exclusively for **demonstration purposes** to showcase my creative process, development skills, and ability to build modern web applications. All data, payments, and registrations are simulated for presentation purposes only.
