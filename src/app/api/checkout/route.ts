@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { handleCheckout } from '@registration/actions/checkout'
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    const { event, formData } = await request.json()
-    const result = await handleCheckout(event, formData)
+    const result = await handleCheckout()
     return NextResponse.json(result)
   } catch (err) {
     console.error('Checkout error:', err)
