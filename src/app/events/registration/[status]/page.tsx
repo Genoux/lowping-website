@@ -48,7 +48,7 @@ export default async function RegistrationStatusPage({
   let details: RegistrationDetails | null = null
   if (status === 'success' && sessionId) {
     try {
-      details = (await getRegistrationDetails(sessionId)) as RegistrationDetails
+      details = (await getRegistrationDetails()) as RegistrationDetails
       console.log('details', details)
       if (!details) {
         console.error('Details not found for session ID:', sessionId)

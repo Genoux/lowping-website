@@ -1,4 +1,5 @@
 // app/layout.tsx
+
 import { Alexandria } from 'next/font/google'
 import { Providers } from '@app/Providers'
 import '@app/globals.css'

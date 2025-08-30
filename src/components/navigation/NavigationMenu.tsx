@@ -59,7 +59,7 @@ export function NavigationMenu() {
                 <Button
                   variant="default"
                   size="sm"
-                  className="flex h-10 items-center gap-1.5 pl-2.5 pr-3 mix-blend-screen"
+                  className="flex h-10 items-center gap-1.5 rounded-full pl-2.5 pr-3 mix-blend-screen"
                 >
                   <Thunder size={16} />
                   <Link
@@ -122,7 +122,7 @@ const NavLink = ({
   <Link href={href}>
     <Button
       variant="ghost"
-      className="group relative text-sm font-normal text-white/90 transition-colors hover:bg-white/20 hover:text-white hover:backdrop-blur-sm"
+      className="group relative rounded-full text-sm font-normal text-white/90 transition-colors hover:bg-white/20 hover:text-white hover:backdrop-blur-sm"
     >
       {children}
     </Button>
